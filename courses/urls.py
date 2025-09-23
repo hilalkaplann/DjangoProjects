@@ -10,5 +10,6 @@ urlpatterns=[
     path('details',views.detail),
     path('programlama', views.programlama),
     path('mobil-uygulamalar', views.mobiluygulamalar),
-    path('<category>', views.getCoursesByCategory)
+    path('<str:category>', views.getCoursesByCategory),
+    path('<int:category_id>', views.getCoursesByCategoryID)
 ]

@@ -6,13 +6,28 @@ from django.http import HttpResponse
 def home(request):
     return HttpResponse('anasayfa')
 
-def details(request):
+def detail(request):
     return HttpResponse('kurs detay listesi')
+
 def programlama(request):
     return HttpResponse('programlama kurs listesi')
 
 
 def mobiluygulamalar(request):
     return HttpResponse('mobil uygulamalar kurs listesi')
+
 def getCoursesByCategory(request, category):
-    return HttpResponse('kategoriye göre kurs listesi')
+    if(category=="programlama"):
+        text="programlama kategorisine ait kurslar"
+    elif(category=="web-gelistirme"):
+        text="web geliştirme kategorisi"
+    else:
+        text="yanlış kategori"
+    return HttpResponse(text)  
+#return HttpResponse(f'{category} kategorisindeki kurs listesi')
+
+def getCoursesByCategoryID(request, category_id):
+    return HttpResponse(category_id)
+    
+def kurslar(request):
+    return HttpResponse('kurs listesi')
