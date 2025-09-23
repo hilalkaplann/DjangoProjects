@@ -6,7 +6,9 @@ from . import views
 
 
 urlpatterns=[
-    path('', views.home),
-    path('anasayfa',views.home),
-    path('kurslar', views.kurslar),
+    path('list', views.kurslar),
+    path('details',views.detail),
+    path('programlama', views.programlama),
+    path('mobil-uygulamalar', views.mobiluygulamalar),
+    path('<category>', views.getCoursesByCategory)
 ]
