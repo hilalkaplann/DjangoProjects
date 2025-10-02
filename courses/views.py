@@ -10,8 +10,11 @@ data = {
 def home(request):
     return HttpResponse('anasayfa')
 
-def detail(request):
-    return HttpResponse('kurs detay listesi')
+def index(request):
+    return render(request, 'courses/index.html')
+
+def details(request):
+    return HttpResponse(f"{kurs_adi} detay sayfası")
 
 def programlama(request):
     return HttpResponse('programlama kurs listesi')
@@ -33,8 +36,15 @@ def getCoursesByCategoryID(request, category_id):
     if(category_id>len(category_list)):
         return HttpResponseNotFound("yanlış kategori seçimi")
     category_name=category_list(category_id - 1)
-    redirect_url=reverse('courses_by_category', args=[category])
+    redirect_url=reverse('courses_by_category', args=[category_name])
     return HttpResponseRedirect(redirect_url)
     
 def kurslar(request):
-    return HttpResponse('kurs listesi')
+    list_items=""
+    category_list = list(data.keys())
+
+    for category in category_list:
+        redirect_url=reverse('courses_by_category', args=[category])    
+        list_items += f"<li><a href='{redirect_url}'> {category}</a></li>"
+    html=f"<h1>kurs listesi</h1><ul>{list_items}</ul>"
+    return HttpResponse(html)
